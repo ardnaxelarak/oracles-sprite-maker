@@ -30,7 +30,7 @@ func main() {
 		log.Fatal(err)
 	}
 
-	basename := filename[:len(filename) - len(filepath.Ext(filename))]
+	basename := filename[:len(filename)-len(filepath.Ext(filename))]
 
 	reader, err := os.Open(filename)
 	if err != nil {
@@ -52,25 +52,25 @@ func main() {
 				if y == 272 && x >= 56 {
 					continue
 				}
-				appendBlock(img, &link, x, y + y2) 
+				appendBlock(img, &link, x, y+y2)
 			}
 		}
 	}
 	modifiedLink := crc32.ChecksumIEEE(link) != vanillaLink
 	if modifiedLink {
-		os.WriteFile(basename + "_link.bin", link, 0644)
+		os.WriteFile(basename+"_link.bin", link, 0644)
 	}
 
 	for y := 272; y < 288; y += 16 {
 		for x := 64; x < 128; x += 8 {
 			for y2 := 0; y2 < 16; y2 += 8 {
-				appendBlock(img, &baby, x, y + y2) 
+				appendBlock(img, &baby, x, y+y2)
 			}
 		}
 	}
 	modifiedBaby := crc32.ChecksumIEEE(baby) != vanillaBaby
 	if modifiedBaby {
-		os.WriteFile(basename + "_baby.bin", baby, 0644)
+		os.WriteFile(basename+"_baby.bin", baby, 0644)
 	}
 
 	if !modifiedLink && !modifiedBaby {
@@ -96,8 +96,8 @@ func main() {
 	patchAges = append(patchAges, 0x45, 0x4F, 0x46)
 	patchSeasons = append(patchSeasons, 0x45, 0x4F, 0x46)
 
-	os.WriteFile(basename + "_ages.ips", patchAges, 0644)
-	os.WriteFile(basename + "_seasons.ips", patchSeasons, 0644)
+	os.WriteFile(basename+"_ages.ips", patchAges, 0644)
+	os.WriteFile(basename+"_seasons.ips", patchSeasons, 0644)
 
 	yaml, err := os.Create(basename + ".yaml")
 	if err != nil {
@@ -121,7 +121,7 @@ func appendBlock(img image.Image, bytes *[]byte, x, y int) {
 	row := make([]int, 8)
 	for j := 0; j < 8; j++ {
 		for i := 0; i < 8; i++ {
-			row[i] = palette.Index(img.At(x + i, y + j))
+			row[i] = palette.Index(img.At(x+i, y+j))
 		}
 		rowLow := 0
 		rowHigh := 0
