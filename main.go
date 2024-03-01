@@ -87,9 +87,9 @@ func main() {
 		patchSeasons = append(patchSeasons, link...)
 	}
 	if modifiedBaby {
-		patchAges = append(patchAges, 0x06, 0xAC, 0xA0, 0x22, 0xE0)
+		patchAges = append(patchAges, 0x06, 0xAC, 0xA0, 0x01, 0x00)
 		patchAges = append(patchAges, baby...)
-		patchSeasons = append(patchSeasons, 0x06, 0xAC, 0x40, 0x22, 0xE0)
+		patchSeasons = append(patchSeasons, 0x06, 0xAC, 0x40, 0x01, 0x00)
 		patchSeasons = append(patchSeasons, baby...)
 	}
 
